@@ -5,7 +5,7 @@ import numpy as np
 import random
 
 # Import data
-df = pd.read_csv('medical_examination.csv')
+df = pd.read_csv('files/medical_examination.csv')
 
 # Add 'overweight' column
 df['overweight'] = np.where( (df['weight'] / (df['height'] * 0.01) ** 2) > 25, 1, 0)
@@ -36,6 +36,7 @@ def draw_cat_plot():
     col = 'cardio', 
     kind = 'bar')
 
+    fig = graph.fig
     fig.savefig('catplot.png')
     return fig
 
@@ -69,6 +70,10 @@ def draw_heat_map():
                     annot = True,
                     fmt = '.1f',
                     square = True,
+                    cbar_kws={
+                      'shrink': .45,
+                      'format': '%.2f'
+                              },
                     mask=mask)
 
     fig.savefig('heatmap.png')
